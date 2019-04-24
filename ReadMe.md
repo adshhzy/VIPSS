@@ -43,22 +43,22 @@ RUNNING
 
 To run the code from the command line, type:
 
-$./vipss -i input_file_name -o output_file_path [-s] [-v number_voxel_per_line] [-l user_lambda] 
+$./vipss -i input_file_name [-l user_lambda]  [-s] [-v number_voxel_per_line] [-o output_file_path]
 
 where:
 1. -i: followed by the path of the input file. input_file_name is a path to the input file. currently, support file format includes ".xyz". The format of .xyz is:
-	x1, y1, z1,
-	x2, y2, z2,
-	.....
-	xn, yn, zn
-	
-2. -o: followed by the path of the output path. output_file_path is a path to the folder for generating output files. Default the folder of the input file.
+x1, y1, z1
+x2, y2, z2
+.....
+xn, yn, zn
+
+2. -l: optional argument. Followed by a float number indicating the lambda which balances the energy (see the paper for details). Default 0 (exact interpolation), you should set and tune this number according to your inputs.
 
 3. -s: optional argument. If -w is included in the command line, the program output the surface (predicted_surface.obj).
 
 4. -v: optional argument. Followed by a unsigned integer number indicating the number of voxels in each dimension for the implicit surfacing. Default 100, you should set this according to your inputs, you can check the triangulated result in predicted_surface.obj by turn on -s option
 
-5. -l: optional argument. Followed by a float number indicating the lambda which balances the energy (see the paper for details). Default 0 (exact interpolation), you should set and tune this number according to your inputs.
+5. -o: optional argument. followed by the path of the output path. output_file_path is a path to the folder for generating output files. Default the folder of the input file.
 
 
 An example is placed at data folder for testing:
