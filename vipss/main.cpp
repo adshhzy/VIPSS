@@ -7,6 +7,7 @@ using namespace std;
 
 
 void SplitPath(const std::string& fullfilename,std::string &filepath);
+void SplitFileName (const std::string& fullfilename,std::string &filepath,std::string &filename,std::string &extname);
 RBF_Paras Set_RBF_PARA();
 int main(int argc, char** argv)
 {
@@ -15,7 +16,7 @@ int main(int argc, char** argv)
 
 
     string infilename;
-    string outpath;
+    string outpath, pcname, ext, inpath;
 
     int n_voxel_line = 100;
 
@@ -25,7 +26,7 @@ int main(int argc, char** argv)
 
     int c;
     optind=1;
-    while ((c = getopt(argc, argv, "i:o:v:l:s")) != -1) {
+    while ((c = getopt(argc, argv, "i:o:l:s:")) != -1) {
         switch (c) {
         case 'i':
             infilename = optarg;
@@ -33,14 +34,12 @@ int main(int argc, char** argv)
         case 'o':
             outpath = string(optarg);
             break;
-        case 'v':
-            n_voxel_line = atoi(optarg);
-            break;
         case 'l':
             user_lambda = atof(optarg);
             break;
         case 's':
             issurfacing = true;
+            n_voxel_line = atoi(optarg);
             break;
         case '?':
             cout << "Bad argument setting!" << endl;
@@ -48,7 +47,8 @@ int main(int argc, char** argv)
         }
     }
 
-    if(outpath.empty())SplitPath(infilename,outpath);
+    if(outpath.empty())SplitFileName(infilename,outpath,pcname,ext);
+    else SplitFileName(infilename,inpath,pcname,ext);
     cout<<"input file: "<<infilename<<endl;
     cout<<"output path: "<<outpath<<endl;
 
@@ -69,11 +69,11 @@ int main(int argc, char** argv)
     rbf_core.InitNormal(para);
     rbf_core.OptNormal(0);
 
-    rbf_core.Write_Hermite_NormalPrediction(outpath+"predicted_normal", 1);
+    rbf_core.Write_Hermite_NormalPrediction(outpath+pcname+"_normal", 1);
 
     if(issurfacing){
         rbf_core.Surfacing(0,n_voxel_line);
-        rbf_core.Write_Surface(outpath+"predicted_surface");
+        rbf_core.Write_Surface(outpath+pcname+"_surface");
     }
 
 

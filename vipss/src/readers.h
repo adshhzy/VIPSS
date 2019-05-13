@@ -14,6 +14,9 @@ bool writeOffFile(string filename,const vector<double>&vertices,const vector<uns
 bool writePLYFile(string filename, const vector<double>&vertices, const vector<unsigned int>&faces2vertices,
                   const vector<double> &vertices_normal, const vector<unsigned char>&vertices_color);
 
+bool writePLYFile_VF(string filename,const vector<double>&vertices,const vector<unsigned int>&faces2vertices);
+bool writePLYFile_VN(string filename,const vector<double>&vertices, const vector<double>&vertices_normal);
+
 bool readPLYFile(string filename,  vector<double>&vertices, vector<double> &vertices_normal);
 
 bool readObjFile(string filename, vector<double>&vertices, vector<unsigned int>&faces2vertices, vector<double> &vertices_normal);
@@ -21,6 +24,8 @@ bool readObjFile_Line(string filename,vector<double>&vertices,vector<unsigned in
 
 bool writeObjFile(string filename,const vector<double>&vertices,const vector<unsigned int>&faces2vertices);
 bool writeObjFile_line(string filename,const vector<double>&vertices,const vector<unsigned int>&edge2vertices);
+bool writeObjFile_vn(string filename,const vector<double>&vertices,const vector<double>&vn);
+
 
 bool readSurfFile(string filename,vector<double>&vertices,vector<unsigned int>&faces2vertices,vector<double>&vertices_field);
 

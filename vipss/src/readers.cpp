@@ -141,6 +141,80 @@ bool writePLYFile(string filename,const vector<double>&vertices,const vector<uns
     return true;
 }
 
+bool writePLYFile_VF(string filename,const vector<double>&vertices,const vector<unsigned int>&faces2vertices){
+    filename = filename + ".ply";
+    ofstream outer(filename.data(), ofstream::out);
+    if (!outer.good()) {
+        cout << "Can not create output PLY file " << filename << endl;
+        return false;
+    }
+
+
+    int n_vertices = vertices.size()/3;
+    int n_faces = faces2vertices.size()/3;
+    outer << "ply" <<endl;
+    outer << "format ascii 1.0"<<endl;
+    outer << "element vertex " << n_vertices <<endl;
+    outer << "property float x" <<endl;
+    outer << "property float y" <<endl;
+    outer << "property float z" <<endl;
+    outer << "element face " << n_faces <<endl;
+    outer << "property list uchar int vertex_indices" <<endl;
+    outer << "end_header" <<endl;
+
+    for(int i=0;i<n_vertices;++i){
+        auto p_v = vertices.data()+i*3;
+        for(int j=0;j<3;++j)outer << p_v[j] << " ";
+        outer << endl;
+    }
+
+    for(int i=0;i<n_faces;++i){
+        auto p_fv = faces2vertices.data()+i*3;
+        outer << "3 ";
+        for(int j=0;j<3;++j)outer << p_fv[j] << " ";
+        outer << endl;
+    }
+    outer.close();
+    cout<<"saving finish: "<<filename<<endl;
+    return true;
+}
+
+
+bool writePLYFile_VN(string filename,const vector<double>&vertices, const vector<double>&vertices_normal){
+    filename = filename + ".ply";
+    ofstream outer(filename.data(), ofstream::out);
+    if (!outer.good()) {
+        cout << "Can not create output PLY file " << filename << endl;
+        return false;
+    }
+
+    int n_vertices = vertices.size()/3;
+    outer << "ply" <<endl;
+    outer << "format ascii 1.0"<<endl;
+    outer << "element vertex " << n_vertices <<endl;
+    outer << "property float x" <<endl;
+    outer << "property float y" <<endl;
+    outer << "property float z" <<endl;
+    outer << "property float nx" <<endl;
+    outer << "property float ny" <<endl;
+    outer << "property float nz" <<endl;
+    outer << "end_header" <<endl;
+
+    for(int i=0;i<n_vertices;++i){
+        auto p_v = vertices.data()+i*3;
+        auto p_vn = vertices_normal.data()+i*3;
+        for(int j=0;j<3;++j)outer << p_v[j] << " ";
+        for(int j=0;j<3;++j)outer << p_vn[j] << " ";
+        outer << endl;
+    }
+
+    outer.close();
+    cout<<"saving finish: "<<filename<<endl;
+    return true;
+}
+
+
+
 bool readPLYFile(string filename,  vector<double>&vertices, vector<double> &vertices_normal){
     ifstream fin(filename.data());
     if(fin.fail()){
@@ -360,6 +434,33 @@ bool writeObjFile(string filename,const vector<double>&vertices,const vector<uns
     cout<<"saving finish: "<<filename<<endl;
     return true;
 
+
+
+}
+
+bool writeObjFile_vn(string filename,const vector<double>&vertices,const vector<double>&vn){
+    filename = filename + ".obj";
+    ofstream outer(filename.data(), ofstream::out);
+    if (!outer.good()) {
+        cout << "Can not create output Obj file " << filename << endl;
+        return false;
+    }
+
+    outer << setprecision(8);
+    int n_vertices = vertices.size()/3;
+    for(int i=0;i<n_vertices;++i){
+        auto p_v = vertices.data()+i*3;
+        outer << "v " << p_v[0] << " "<< p_v[1] << " "<< p_v[2] << endl;
+    }
+    for(int i=0;i<n_vertices;++i){
+        auto p_vn = vn.data()+i*3;
+        outer << "vn " << p_vn[0] << " "<< p_vn[1] << " "<< p_vn[2] << endl;
+    }
+
+
+    outer.close();
+    cout<<"saving finish: "<<filename<<endl;
+    return true;
 
 
 }

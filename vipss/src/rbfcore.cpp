@@ -259,7 +259,9 @@ void RBF_Core::SetThis(){
 
 void RBF_Core::Write_Surface(string fname){
 
-    writeObjFile(fname,finalMesh_v,finalMesh_fv);
+    //writeObjFile(fname,finalMesh_v,finalMesh_fv);
+
+    writePLYFile_VF(fname,finalMesh_v,finalMesh_fv);
 }
 
 /**********************************************************/

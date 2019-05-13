@@ -15,7 +15,7 @@ BUILDING
 ======================================================================================================
 
 
-The code has only two dependencies: 1)Armadillo,   2)NLOPT,  3)Suite-Sparse
+The code has only two dependencies: 1)Armadillo,   2)NLOPT
 
 1) http://arma.sourceforge.net/
 
@@ -43,7 +43,7 @@ RUNNING
 
 To run the code from the command line, type:
 
-$./vipss -i input_file_name [-l user_lambda]  [-s] [-v number_voxel_per_line] [-o output_file_path]
+$./vipss -i input_file_name [-l user_lambda] [-s number_voxel_per_line] [-o output_file_path]
 
 where:
 1. -i: followed by the path of the input file. input_file_name is a path to the input file. currently, support file format includes ".xyz". The format of .xyz is:
@@ -54,20 +54,19 @@ xn, yn, zn
 
 2. -l: optional argument. Followed by a float number indicating the lambda which balances the energy (see the paper for details). Default 0 (exact interpolation), you should set and tune this number according to your inputs.
 
-3. -s: optional argument. If -w is included in the command line, the program output the surface (predicted_surface.obj).
+3. -s: optional argument. Followed by a unsigned integer number indicating the number of voxels in each dimension for the implicit surfacing. Only If -s is included in the command line, the program would output the surface ([input file name]_surface.obj). We recomment using 100 for a default value, and you should set this according to your inputs and the precision of the output. Notices that the surfacing algorithm takes quite a long time for surfacing the zero-level set, and it depends on the resolution and the shape of the zero-level set.
 
-4. -v: optional argument. Followed by a unsigned integer number indicating the number of voxels in each dimension for the implicit surfacing. Default 100, you should set this according to your inputs, you can check the triangulated result in predicted_surface.obj by turn on -s option
-
-5. -o: optional argument. followed by the path of the output path. output_file_path is a path to the folder for generating output files. Default the folder of the input file.
+4. -o: optional argument. followed by the path of the output path. output_file_path is a path to the folder for generating output files. Default the folder of the input file.
 
 
-An example is placed at data folder for testing:
-1. $./vipss -i ../data/hand_ok/input.xyz -l 0 -s -v 200
+Some examples have been placed at data folder for testing:
+1. $./vipss -i ../data/hand_ok/input.xyz -l 0 -s 200
+2. $./vipss -i ../data/walrus/input.xyz -l 0.003 -s 100
 
-The program will generate the predict normal in predicted_normal.ply 
+The program will generate the predicted normal in [input file name]_normal.ply.
+If -s is included in the command line, the program will generate the surface as the zero-level set of the solved implicit function ([input file name]_surface.obj).
 
-
-We are still reconstructing and optimizing the code from the original research code, thus some details in the paper has not been fully reproduced. A more compact and friendly version with visualization code and more examples will be updated soon.
+For further questions about the code and the paper, please contact Zhiyang Huang at adshhzy@gmail.com or zhiyang.huang@wustl.edu (might be invalid after he graduated). You can also contact Prof. Tao Ju at taoju@wustl.edu.
 
 
 

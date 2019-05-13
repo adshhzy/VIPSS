@@ -47,11 +47,11 @@ void RBF_Core::NormalRecification(double maxlen, vector<double>&nors){
 bool RBF_Core::Write_Hermite_NormalPrediction(string fname, int mode){
 
 
-    vector<uchar>labelcolor(npt*4);
-    vector<uint>f2v;
-    uchar red[] = {255,0,0, 255};
-    uchar green[] = {0,255,0, 255};
-    uchar blue[] = {0,0,255, 255};
+//    vector<uchar>labelcolor(npt*4);
+//    vector<uint>f2v;
+//    uchar red[] = {255,0,0, 255};
+//    uchar green[] = {0,255,0, 255};
+//    uchar blue[] = {0,0,255, 255};
 //    for(int i=0;i<labels.size();++i){
 //        uchar *pcolor;
 //        if(labels[i]==0)pcolor = green;
@@ -61,10 +61,10 @@ bool RBF_Core::Write_Hermite_NormalPrediction(string fname, int mode){
 //    }
     //fname += mp_RBF_METHOD[curMethod];
 
-    for(int i=0;i<npt;++i){
-        uchar *pcolor = green;
-        for(int j=0;j<4;++j)labelcolor[i*4+j] = pcolor[j];
-    }
+//    for(int i=0;i<npt;++i){
+//        uchar *pcolor = green;
+//        for(int j=0;j<4;++j)labelcolor[i*4+j] = pcolor[j];
+//    }
 
     vector<double>nors;
     if(mode ==0)nors=initnormals;
@@ -73,9 +73,11 @@ bool RBF_Core::Write_Hermite_NormalPrediction(string fname, int mode){
     NormalRecification(1.,nors);
 
     //for(int i=0;i<npt;++i)if(randomdouble()<0.5)MyUtility::negVec(nors.data()+i*3);
-
     //cout<<pts.size()<<' '<<f2v.size()<<' '<<nors.size()<<' '<<labelcolor.size()<<endl;
-    writePLYFile(fname,pts,f2v,nors,labelcolor);
+    //writePLYFile(fname,pts,f2v,nors,labelcolor);
+
+//    writeObjFile_vn(fname,pts,nors);
+    writePLYFile_VN(fname,pts,nors);
 
     return 1;
 }
