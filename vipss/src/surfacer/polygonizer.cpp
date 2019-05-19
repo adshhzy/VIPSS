@@ -36,6 +36,8 @@
 #include <math.h>
 #ifdef WIN32
 #include <malloc.h>
+#elif  defined(__linux__)
+#include <stdlib.h>
 #else
 #include <sys/malloc.h>
 #endif
