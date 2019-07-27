@@ -66,6 +66,7 @@ Some examples have been placed at data folder for testing:
 The program will generate the predicted normal in [input file name]_normal.ply.
 If -s is included in the command line, the program will generate the surface as the zero-level set of the solved implicit function ([input file name]_surface.ply).
 
+Notice: The current surface tracker does NOT producing multi-component surface. We refer the user to use CGAL implicit mesher if needed. We will update the program to it soon.
 
 For further questions about the code and the paper, please contact Zhiyang Huang at adshhzy@gmail.com or zhiyang.huang@wustl.edu (might be invalid after he graduated). You can also contact Prof. Tao Ju at taoju@wustl.edu.
 
