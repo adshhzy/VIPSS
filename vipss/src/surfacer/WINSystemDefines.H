@@ -139,12 +139,12 @@ inline bool FileExists( const string &in_str )
 #endif
 
 
-#if defined(linux)
+#if defined(__linux__)
 #  include <string.h>
 #  include <strings.h>
 #endif
 
-#if defined(linux) || defined(powerpc) || defined(__APPLE__)
+#if defined(__linux__) || defined(powerpc) || defined(__APPLE__)
 #  include <float.h>
 #  include <stdio.h>
 #  include <stdlib.h>
