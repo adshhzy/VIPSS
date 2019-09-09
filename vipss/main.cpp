@@ -22,11 +22,12 @@ int main(int argc, char** argv)
 
     double user_lambda = 0;
 
-    bool issurfacing = false;
+    bool is_surfacing = false;
+    bool is_outputtime = false;
 
     int c;
     optind=1;
-    while ((c = getopt(argc, argv, "i:o:l:s:")) != -1) {
+    while ((c = getopt(argc, argv, "i:o:l:s:t")) != -1) {
         switch (c) {
         case 'i':
             infilename = optarg;
@@ -38,8 +39,11 @@ int main(int argc, char** argv)
             user_lambda = atof(optarg);
             break;
         case 's':
-            issurfacing = true;
+            is_surfacing = true;
             n_voxel_line = atoi(optarg);
+            break;
+        case 't':
+            is_outputtime = true;
             break;
         case '?':
             cout << "Bad argument setting!" << endl;
@@ -53,7 +57,7 @@ int main(int argc, char** argv)
     cout<<"output path: "<<outpath<<endl;
 
     cout<<"user lambda: "<<user_lambda<<endl;
-    cout<<"is surfacing: "<<issurfacing<<endl;
+    cout<<"is surfacing: "<<is_surfacing<<endl;
 
     cout<<"number of voxel per D: "<<n_voxel_line<<endl;
 
@@ -71,12 +75,14 @@ int main(int argc, char** argv)
 
     rbf_core.Write_Hermite_NormalPrediction(outpath+pcname+"_normal", 1);
 
-    if(issurfacing){
+    if(is_surfacing){
         rbf_core.Surfacing(0,n_voxel_line);
         rbf_core.Write_Surface(outpath+pcname+"_surface");
     }
 
-
+    if(is_outputtime){
+        rbf_core.Print_TimerRecord_Single(outpath+pcname+"_time.txt");
+    }
 
 
 

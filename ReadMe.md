@@ -21,17 +21,11 @@ The code has only two dependencies: 1)Armadillo,   2)NLOPT
 
 2) https://nlopt.readthedocs.io/en/latest/
 
-After download/install the three dependencies, please go to folder vipss and modify the relevant path according to your installation in the CMakeList.txt, e.g.
+You can download & install them by yourself, or run the env.sh script which will install homebrew first, and then install the two dependencies via homebrew.
+$source env.sh
 
-Armadillo include file path:    SET(ARMADILLO_INCLUDE_DIRS "/opt/local/include/")
-Armadillo lib file path:    SET(ARMADILLO_LIB_DIRS "/opt/local/lib/")
-
-NLOPT include file and lib path:
-SET(NLOPT_INCLUDE_DIRS "/opt/local/include/")
-SET(NLOPT_LIB_DIR "/opt/local/lib/")
-
-
-Then build the Cmake file and make:
+Then go to the vipss folder, build the Cmake file and make:
+$cd vipss
 $cmake .
 $make
 
@@ -56,8 +50,9 @@ xn, yn, zn
 
 3. -s: optional argument. Followed by a unsigned integer number indicating the number of voxels in each dimension for the implicit surfacing. Only If -s is included in the command line, the program would output the surface ([input file name]_surface.ply). We recomment using 100 for a default value, and you should set this according to your inputs and the precision of the output. Notices that the surfacing algorithm takes quite a long time for surfacing the zero-level set, and it depends on the resolution and the shape of the zero-level set.
 
-4. -o: optional argument. followed by the path of the output path. output_file_path is a path to the folder for generating output files. Default the folder of the input file.
+4. -o: optional argument. Followed by the path of the output path. output_file_path is a path to the folder for generating output files. Default the folder of the input file.
 
+5. -t: optional argument. when it is activated, the program will create a txt file ([input file name]_time.txt) which records the timing information in this run.
 
 Some examples have been placed at data folder for testing:
 1. $./vipss -i ../data/hand_ok/input.xyz -l 0 -s 200
@@ -65,6 +60,10 @@ Some examples have been placed at data folder for testing:
 
 The program will generate the predicted normal in [input file name]_normal.ply.
 If -s is included in the command line, the program will generate the surface as the zero-level set of the solved implicit function ([input file name]_surface.ply).
+
+To generate all the example in the paper, please run the makefigure.sh script in the vipss folder:
+$source makefigure.sh
+The result will be generated into the data folder respectively.
 
 Notice: The current surface tracker does NOT producing multi-component surface. We refer the user to use CGAL implicit mesher if needed. We will update the program to it soon.
 

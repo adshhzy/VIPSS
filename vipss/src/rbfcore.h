@@ -207,7 +207,7 @@ public:
 public:
 
     double Dist_Function(const double x, const double y, const double z);
-    double Dist_Function(const double *p);
+    inline double Dist_Function(const double *p);
 
 public:
     static double Dist_Function(const R3Pt &in_pt);
@@ -328,7 +328,7 @@ public:
     vector<double>record_energy;
     vector<double>record_time;
 
-    double setup_time, init_time, solve_time, callfunc_time,invM_time, setK_time;
+    double setup_time, init_time, solve_time, callfunc_time,invM_time, setK_time, surf_time;
     vector<double>setup_timev, init_timev, solve_timev, callfunc_timev,invM_timev,setK_timev;
 
     void Record();
@@ -338,6 +338,8 @@ public:
     void Print_TimerRecord(string fname);
     void Clear_TimerRecord();
     void Print_Record_Init();
+
+    void Print_TimerRecord_Single(string fname);
 
 };
 

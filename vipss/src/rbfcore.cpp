@@ -195,7 +195,7 @@ double RBF_Core::Dist_Function(const double x, const double y, const double z){
 
 
 
-double RBF_Core::Dist_Function(const double *p){
+inline double RBF_Core::Dist_Function(const double *p){
 
     n_evacalls++;
     double *p_pts = pts.data();
@@ -345,9 +345,6 @@ void RBF_Core::Print_Record(){
 
 void RBF_Core::Print_TimerRecord(string fname){
 
-    cout<<setprecision(4);
-    cout<<endl;
-
     ofstream fout(fname);
     fout<<setprecision(5);
     if(!fout.fail()){
@@ -357,6 +354,19 @@ void RBF_Core::Print_TimerRecord(string fname){
     }
     fout.close();
 
+}
+
+void RBF_Core::Print_TimerRecord_Single(string fname){
+
+    ofstream fout(fname);
+    fout<<setprecision(5);
+    if(!fout.fail()){
+        fout<<"number of points: "<<npt<<endl
+           <<"setup_time: "<<setup_time<<endl
+          <<"init_time: "<<init_time<<endl
+         <<"solve_time: "<<solve_time<<endl;
+    }
+    fout.close();
 }
 
 void RBF_Core::Clear_TimerRecord(){
