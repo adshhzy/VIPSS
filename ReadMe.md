@@ -24,12 +24,13 @@ The code has only two dependencies: 1)Armadillo,   2)NLOPT
 2) https://nlopt.readthedocs.io/en/latest/
 
 You can download & install them by yourself, or run the env.sh script which will install homebrew first, and then install the two dependencies via homebrew.
-$source env.sh
 
-Then go to the vipss folder, build the Cmake file and make:
-$cd vipss
-$cmake .
-$make
+$source env.sh  
+
+Then go to the vipss folder, build the Cmake file and make:  
+$cd vipss  
+$cmake .  
+$make  
 
 In the vipss directory, there should be an executable called "vipss" (or "vipss.exe" on Windows if it is successfully built).
 
@@ -42,11 +43,11 @@ To run the code from the command line, type:
 $./vipss -i input_file_name [-l user_lambda] [-s number_voxel_per_line] [-o output_file_path]
 
 where:
-1. -i: followed by the path of the input file. input_file_name is a path to the input file. currently, support file format includes ".xyz". The format of .xyz is:
-x1, y1, z1
-x2, y2, z2
-.....
-xn, yn, zn
+1. -i: followed by the path of the input file. input_file_name is a path to the input file. currently, support file format includes ".xyz". The format of .xyz is:  
+x1, y1, z1  
+x2, y2, z2  
+.....  
+xn, yn, zn  
 
 2. -l: optional argument. Followed by a float number indicating the lambda which balances the energy (see the paper for details). Default 0 (exact interpolation), you should set and tune this number according to your inputs.
 
@@ -63,13 +64,13 @@ Some examples have been placed at data folder for testing:
 The program will generate the predicted normal in [input file name]_normal.ply.
 If -s is included in the command line, the program will generate the surface as the zero-level set of the solved implicit function ([input file name]_surface.ply).
 
-To generate all the example in the paper, please run the makefigure.sh script in the vipss folder:
-$source makefigure.sh
+:bell: To generate all the example in the paper, please run the makefigure.sh script in the vipss folder:  
+$source makefigure.sh  
 The result will be generated into the data folder respectively.
 
-Notice: The current surface tracker does NOT producing multi-component surface. We refer the user to use CGAL implicit mesher if needed. We will update the program to it soon.
+:bell: Notice: The current surface tracker does NOT producing multi-component surface. We refer the user to use CGAL implicit mesher if needed. We will update the program to it soon.
 
-For further questions about the code and the paper, please contact Zhiyang Huang at adshhzy@gmail.com or zhiyang.huang@wustl.edu (might be invalid after he graduated). You can also contact Prof. Tao Ju at taoju@wustl.edu.
+:mega: For further questions about the code and the paper, please contact Zhiyang Huang at adshhzy@gmail.com or zhiyang.huang@wustl.edu (might be invalid after he graduated). You can also contact Prof. Tao Ju at taoju@wustl.edu.
 
 
 
