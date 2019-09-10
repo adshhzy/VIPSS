@@ -362,9 +362,10 @@ void RBF_Core::Print_TimerRecord_Single(string fname){
     fout<<setprecision(5);
     if(!fout.fail()){
         fout<<"number of points: "<<npt<<endl
-           <<"setup_time: "<<setup_time<<endl
-          <<"init_time: "<<init_time<<endl
-         <<"solve_time: "<<solve_time<<endl;
+           <<"setup_time (Compute H): "<<setup_time<<endl
+          <<"init_time (Optimize g/Eigen): "<<init_time<<endl
+         <<"solve_time (Optimize g/LBFGS): "<<solve_time<<endl
+        <<"surfacing_time: "<<surf_time<<endl;
     }
     fout.close();
 }
