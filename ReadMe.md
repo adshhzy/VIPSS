@@ -4,7 +4,11 @@ VIPSS - Zhiyang Huang (2019)
 
 This code implements the algorithm described in
 
-Huang, Zhi Yang, et al. "Variational Implicit Point Set Surface"  SIGGRAPH 2019. [Project Link]
+  Variational Implicit Point Set Surface.
+ 
+  Zhiyang Huang, Nathan Carr, Tao Ju.
+ 
+  ACM Transactions on Graphics (Proc. ACM Siggraph 2019)
 
 The primary function of this program is to predict the normal as well as the underlying surface of a given set of unoriented points.
 
