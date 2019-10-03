@@ -90,7 +90,7 @@ void RBF_Core::Surfacing(int method, int n_voxels_1d){
     n_evacalls = 0;
     Surfacer sf;
 
-    surf_time = sf.Surfacing_Implicit(pts,n_voxels_1d,true,RBF_Core::Dist_Function);
+    surf_time = sf.Surfacing_Implicit(pts,n_voxels_1d,false,RBF_Core::Dist_Function);
 
     sf.WriteSurface(finalMesh_v,finalMesh_fv);
 
