@@ -8,21 +8,6 @@ static Surfacer *p_ImplicitSurfacer;
 
 static int TriProc(int in_i1, int in_i2, int in_i3, VERTICES vs) {
     const R3Pt pt = vs.ptr[in_i1].position;
-
-    //    bool bOutside = false;
-    //    for ( int j = 0; j < 3; j++ ) {
-    //        const double dWidth = s_ptMax[j] - s_ptMin[j];
-    //        if ( pt[j] < s_ptMin[j] - dWidth * 0.1 ) {
-    //            bOutside = true;
-    //        }
-    //        if ( pt[j] > s_ptMax[j] + dWidth * 0.1 ) {
-    //            bOutside = true;
-    //        }
-    //    }
-    //    if ( bOutside == false ) {
-    //        s_afaceSurface.addItem( R3Pt_i( in_i1, in_i2, in_i3 ) );
-    //    }
-
     p_ImplicitSurfacer->s_afaceSurface.addItem( R3Pt_i( in_i3, in_i2, in_i1 ) );
     return 1;
 }
@@ -78,17 +63,6 @@ void Surfacer::CalSurfacingPara(vector<double>&Vs, int nvoxels){
 }
 
 
-
-
-int GetOffSurfacePoint(vector<double>&offPts, vector<double>&surPts, vector<uint>&surfv, vector<double>&testPts, double offthres){
-
-
-
-
-}
-
-
-
 double Surfacer::Surfacing_Implicit(vector<double>&Vs,int n_voxels, bool ischeckall,
                                     double (*function)(const R3Pt &in_pt)){
 
@@ -113,30 +87,7 @@ double Surfacer::Surfacing_Implicit(vector<double>&Vs,int n_voxels, bool ischeck
         polygonize(function, dSize, iBound, st, TriProc, VertProc);
         GetCurSurface(all_v,all_fv);
     }else{
-
-        vector<double>offPts;
-        vector<double>surPts;
-        vector<uint>surfv;
-        vector<double>testPts = Vs;
-
-
-        int ncomp = 0;
-        while(true){
-            ClearSingleComponentBuffer();
-            if(polygonize(function, dSize, iBound, st, TriProc, VertProc))break;
-
-            GetCurSurface(surPts,surfv);
-            InsertToCurSurface(surPts,surfv);
-            GetOffSurfacePoint(offPts,surPts,surfv,testPts,5e-2);
-            cout<<"ncomp found: "<<++ncomp<<" offpts: "<<offPts.size()/3<<endl;
-            if(offPts.size()<=10*3)break;
-            break;
-
-            for(int j=0;j<3;++j)st[j] = offPts[j];
-            testPts = offPts;
-        }
-
-
+        cout << "Deprecated, Please seek to CGAL implicit surfacer for surfaces with multiple connected components" <<endl;
     }
 
     cout<<"Implicit Surfacing Done."<<endl;
